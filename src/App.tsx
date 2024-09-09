@@ -1,8 +1,12 @@
 import './App.css'
+import Pessoas from './views/pessoas'
 
 function App() {
   return (
-    <h1>Hello world</h1>
+    <div>
+      <Pessoas />
+    </div>
+    
   )
 }
 
