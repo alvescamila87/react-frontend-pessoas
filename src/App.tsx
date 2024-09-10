@@ -8,12 +8,12 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <Menu /> 
         <Routes>
-          <Route path="/" element={<Menu />}/>
-          <Route path="/listar" element={<ListaPessoas/>}/>
+          <Route path="/" element={<ListaPessoas/>}/>
           <Route path="/cadastro" element={<Pessoas />}/>
-          <Route path="/relatorio" element="A DEFINIR"/>
-          <Route path="*" element={<Menu />}/>
+          <Route path="/relatorio" element={<>A DEFINIR PATH DO RELATÓRIO CSV</>}/>
+          <Route path="/*" element={<ListaPessoas/>}/>
         </Routes>
       </BrowserRouter>      
     </div>
