@@ -3,11 +3,12 @@ import styles from "./styles"
 import { useState } from "react";
 
 const INITIAL_STATE = {
-    nome: 'Zebedeu Abraão',
-    cpf: '123.456.789-00',
-    telefone: '(47) 9999-5555',
-    cep: 89030500,
+    nome: '',
+    cpf: '',
+    telefone: '',
+    cep: 0,
 }
+
 
 export default function Pessoas() {
 
@@ -22,6 +23,7 @@ export default function Pessoas() {
                         name="nome" 
                         label="Nome completo" 
                         placeholder="Informe o nome" 
+                        value={pessoa.nome}
                         required 
                         onChange={e => setPessoa({...pessoa, nome: e.target.value})}
                     />
