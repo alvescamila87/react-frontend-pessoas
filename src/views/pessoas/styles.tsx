@@ -3,6 +3,8 @@ import { styled } from "@mui/material";
 const PessoaForm = styled('form')`
     display: flex;
     flex-direction: column;
+    margin: 20px;
+    padding: 20px;
 `;
 
 const PessoaInfo = styled('fieldset')`

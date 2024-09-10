@@ -37,7 +37,7 @@ function ResponsiveAppBar() {
                             size="large"
                             aria-label="account of current user"
                             aria-controls="menu-bar"
-                            aria-hspopup="true"
+                            aria-haspopup="true"
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >

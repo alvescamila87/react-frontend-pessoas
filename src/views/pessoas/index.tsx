@@ -13,10 +13,15 @@ const INITIAL_STATE = {
 export default function Pessoas() {
 
     const [pessoa, setPessoa] = useState(INITIAL_STATE);
-    //console.log(pessoa);
+    console.log(pessoa);
+
+    const handleSubmitPessoa = (event:React.FormEvent) => {
+        event.preventDefault();
+        console.log("Dentro Handle: ", pessoa)
+    }
         
     return (
-        <styles.PessoaForm>   
+        <styles.PessoaForm onSubmit={handleSubmitPessoa}>   
             < styles.PessoaInfo>
                 <legend>Informações de cadastro</legend>
                 <TextField 
@@ -31,6 +36,7 @@ export default function Pessoas() {
                         name='cpf'
                         label="CPF" 
                         placeholder="000.000.000-00" 
+                        value={pessoa.cpf}
                         required 
                         onChange={e => setPessoa({...pessoa, cpf: e.target.value})}
                     />
@@ -38,12 +44,13 @@ export default function Pessoas() {
                         name="telefone"
                         label="Telefone" 
                         placeholder="(XX) XXXX-XXXX"
+                        value={pessoa.telefone}
                         onChange={e => setPessoa({...pessoa, telefone: e.target.value})}
                     />
             </styles.PessoaInfo>
             <styles.PessoaEndereco>
                 <legend>Endereço</legend>
-                    <TextField name="cep" label="CEP" placeholder="00000-000" type="number" required/>
+                    <TextField name="cep" label="CEP" placeholder="00000-000" type="number" value={pessoa.cep} onChange= {e => setPessoa({...pessoa, cep: +e.target.value})} required/>
                     <TextField name="logradouro" label="Logradouro" placeholder="00000-000" variant="filled" disabled/>
                     <TextField name="numero" label="Número" placeholder="Informe o número" />
                     <TextField name="complemento" label="Complemento" placeholder="Informe o complemento do endereço"/>
