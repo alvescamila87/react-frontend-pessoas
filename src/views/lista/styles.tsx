@@ -1,6 +1,13 @@
-import { styled } from "@mui/material"
+import { styled, TableHead } from "@mui/material"
 
-const headerTable = styled('thead')`
+const TableHeadCustom = styled(TableHead)`
     background-color: lightgray;
 `
-export default { headerTable }
+
+const TableButtonsCustom = styled('div')`
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+
+`
+export default { TableHeadCustom, TableButtonsCustom }
