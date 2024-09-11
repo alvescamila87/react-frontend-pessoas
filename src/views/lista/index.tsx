@@ -1,4 +1,3 @@
-import Data from '../data/mock'
 import styles from './styles'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,7 +15,6 @@ export default function ListaPessoas() {
 
     async function consultarPessoas() {
         const pessoas = await API.get('/pessoas')
-        //setPessoaInfo(pessoas.data)
         console.log(pessoas.data)       
         setPessoaInfo(pessoas.data)
     }
@@ -29,8 +27,8 @@ export default function ListaPessoas() {
     const renderRows = () => {
        return pessoaInfo.map(pessoa => {
             return (
-                <TableRow key={`${pessoa.id}`}>
-                    <TableCell>{`${pessoa.id}`}</TableCell>
+                <TableRow key={+pessoa.id}>
+                    <TableCell>{+pessoa.id}</TableCell>
                     <TableCell align="right" >{pessoa.nomeCompleto}</TableCell>
                     <TableCell align="right" >{pessoa.cpf}</TableCell>
                     <TableCell align="right" >{pessoa.telefone}</TableCell>
