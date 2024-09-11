@@ -3,19 +3,19 @@ import styles from "./styles"
 import { useState } from "react";
 
 // tipar o dados de pessoa
-interface Pessoa {
+interface PessoaInfo {
     nome: String,
     cpf: String,
-    telefone: String,
+    telefone?: String,
     cep: Number, 
-    numero: String, 
-    complemento: String, 
+    numero?: String, 
+    complemento?: String, 
 }
 
 export default function Pessoas() {
 
     // inicio o usestate com um 'initial state'
-    const [entradaDados, setEntradaDados] = useState<Pessoa>({
+    const [entradaDados, setEntradaDados] = useState<PessoaInfo>({
         nome: "",
         cpf: "",
         telefone: "",
@@ -37,7 +37,7 @@ export default function Pessoas() {
     }
 
     function clearForm() {
-//        e.preventDefault();
+        // e.preventDefault();
         setEntradaDados({
             nome: "",
             cpf: "",
