@@ -10,4 +10,21 @@ const TableButtonsCustom = styled('div')`
     gap: 5px;
 
 `
-export default { TableHeadCustom, TableButtonsCustom }
+
+const PessoaInfo = styled('fieldset')`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 20px;
+    padding: 36px;
+`;
+
+const EnderecoInfo = styled('fieldset')`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 20px;
+    padding: 36px;
+`
+
+export default { TableHeadCustom, TableButtonsCustom, PessoaInfo, EnderecoInfo}
