@@ -1,13 +1,13 @@
 export interface PessoaData {
-    id: Number,
+    id?: Number,
     nomeCompleto: String,
     cpf: String,
     telefone?: String,
-    endereco: EnderecoData[],
+    endereco: EnderecoData
 }
 
 export interface EnderecoData {
-    id: Number,
+    id?: Number,
     cep: String,
     logradouro: String,
     numero: String,
@@ -15,8 +15,8 @@ export interface EnderecoData {
     bairro: String,
     localidade: String,
     uf: String,
-    ddd: String,
-    gia: String,
-    ibge: String,
-    siafi: String
+    ddd?: String,
+    gia?: String,
+    ibge?: String,
+    siafi?: String
 }

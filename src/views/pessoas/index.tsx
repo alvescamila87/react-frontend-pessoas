@@ -1,32 +1,33 @@
 import { TextField, Button } from "@mui/material"
 import styles from "./styles"
-import { useEffect, useState } from "react";
+import { useEffect, useState, FocusEvent } from "react";
 import APIViaCEP from "../../api/apiViaCEP";
-//import { PessoaData } from "../data/data";
+import APIPessoa from "../../api/apiPessoa";
+import { PessoaData } from "../data/data";
 
 
-//tipar o dados de pessoa
-interface PessoaInfo {
-    nome: String,
-    cpf: String,
-    telefone?: String,
-    endereco: {
-        id: number,
-        cep: String,
-        logradouro: String,
-        numero: String,
-        bairro: String,
-        complemento: String,
-        localidade: String,
-        uf: String,
-    }
-}
+// //tipar o dados de pessoa
+// interface PessoaInfo {
+//     nome: String,
+//     cpf: String,
+//     telefone?: String,
+//     endereco: {
+//         id: number,
+//         cep: String,
+//         logradouro: String,
+//         numero: String,
+//         bairro: String,
+//         complemento: String,
+//         localidade: String,
+//         uf: String,
+//     }
+// }
 
 export default function Pessoas() {
 
     // inicio o usestate com um 'initial state'
-    const [entradaDados, setEntradaDados] = useState<PessoaInfo>({        
-        nome: "",
+    const [entradaDados, setEntradaDados] = useState<PessoaData>({   
+        nomeCompleto: "",
         cpf: "",
         telefone: "",
         endereco: {
@@ -42,7 +43,7 @@ export default function Pessoas() {
     });
 
 
-    function handleCheckCEP(e: any) {
+    function handleCheckCEP(e: FocusEvent<HTMLInputElement>) {
         const cepFormatado = e.target.value.replace(/\D/g, '');
         console.log(cepFormatado);
         handleBuscaCEP(cepFormatado)
@@ -52,34 +53,30 @@ export default function Pessoas() {
 
         if(cepFormatado.length === 8) {
 
-            const consultaCEP = await APIViaCEP.get(`/${cepFormatado}/json/`)
-            console.log("Consultando API VIACEP: ", consultaCEP.data) 
+            try {
 
-            // const data = {
-            //     ...consultaCEP.data, 
-            //     logradouro: consultaCEP.data.logradouro,
-            //     complemento: consultaCEP.data.complemento,
-            //     bairro: consultaCEP.data.bairro,
-            //     localidade: consultaCEP.data.localidade,
-            //     UF: consultaCEP.data.uf
-            // }
-            // console.log(data)
-            // setEntradaDados({...entradaDados, data})
+                const consultaCEP = await APIViaCEP.get(`/${cepFormatado}/json/`)
+                console.log("Consultando API VIACEP: ", consultaCEP.data) 
 
-            const { logradouro, complemento, bairro, localidade, uf } = consultaCEP.data;
+                const { logradouro, complemento, bairro, localidade, uf } = consultaCEP.data;
 
-            setEntradaDados(values => ({
-                ...values,
-                endereco: {
-                    ...values.endereco,
-                    logradouro: logradouro || "",
-                    complemento: complemento || "",
-                    bairro: bairro || "",
-                    localidade: localidade || "",
-                    uf: uf || ""
-                }
-            }))
-        } 
+                setEntradaDados(values => ({
+                    ...values,
+                    endereco: {
+                        ...values.endereco,
+                        logradouro: logradouro || "",
+                        complemento: complemento || "",
+                        bairro: bairro || "",
+                        localidade: localidade || "",
+                        uf: uf || ""
+                    }
+                }))
+
+            } catch (error) {
+                console.error("Erro ao buscar CEP: ", error)
+            }
+
+        }
     }
 
     useEffect(() => {
@@ -107,16 +104,26 @@ export default function Pessoas() {
         }
 
     }
+       
 
-    const handleSubmitSalvarPessoa = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log("Submit cadastro pessoa: ", entradaDados)        
+    const handleSubmitPessoa = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();        
+        console.log("Submit cadastro pessoa: ", entradaDados)
+
+        try {
+            const novoCadastro = await APIPessoa.post('/pessoas', entradaDados)
+            console.log("Cadastro pessoa: ", novoCadastro)
+
+        } catch (error){
+            console.error("Erro ao enviar cadastro: ", error)
+        }
+                
     }
 
     function clearForm() {
         // e.preventDefault();
         setEntradaDados({
-            nome: "",
+            nomeCompleto: "",
             cpf: "",
             telefone: "",
             endereco: {
@@ -133,15 +140,15 @@ export default function Pessoas() {
     }
         
     return (
-        <styles.PessoaForm onSubmit={handleSubmitSalvarPessoa}>   
+        <styles.PessoaForm onSubmit={handleSubmitPessoa}>   
             < styles.PessoaInfo>
                 <legend>Informações de cadastro</legend>
                 <TextField 
-                        name="nome" 
+                        name="nomeCompleto" 
                         type="text"
                         label="Nome completo" 
                         placeholder="Informe o nome" 
-                        value={(entradaDados.nome)}
+                        value={(entradaDados.nomeCompleto)}
                         onChange={handleChangeDados}
                         required
                     />
