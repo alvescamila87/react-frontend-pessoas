@@ -27,4 +27,11 @@ const EnderecoInfo = styled('fieldset')`
     padding: 36px;
 `
 
-export default { TableHeadCustom, TableButtonsCustom, PessoaInfo, EnderecoInfo}
+const ButtonCustom = styled('div')`
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    padding: 20px;
+`
+
+export default { TableHeadCustom, TableButtonsCustom, PessoaInfo, EnderecoInfo, ButtonCustom}

@@ -9,6 +9,7 @@ import API from '../../api/apiPessoa';
 import { useEffect, useState } from 'react';
 import { PessoaData } from '../data/data';
 import { Button, Dialog, DialogTitle, TextField } from '@mui/material';
+// import APIPessoa from '../../api/apiPessoa';
 
 export default function ListaPessoas() {  
 
@@ -24,6 +25,15 @@ export default function ListaPessoas() {
         setPessoaInfo(pessoas.data)
     }
 
+    // async function editarPessoa(id: number) {
+    //     const atualizarPessoa = await APIPessoa.put(`/pessoa/${id}`)
+    //     try {
+
+    //     } catch (error) {
+    //         console.error("ID '", id, "' não foi encontrado.")
+    //     }
+    // }
+
     const handleAbrirModal = (isEdit: boolean) => {
         setAbreModal(true);
         setPermitirEditar(!isEdit);
@@ -37,7 +47,6 @@ export default function ListaPessoas() {
     useEffect(() => {
         consultarPessoas()
     }, []) 
-
 
     const renderRows = () => {
        return pessoaInfo.map(pessoa => {
@@ -84,6 +93,13 @@ export default function ListaPessoas() {
                 <DialogTitle>Detalhes de cadastro</DialogTitle>
                 <styles.PessoaInfo>
                     <legend>Pessoa</legend>
+                        <TextField 
+                            name="id" 
+                            type="number"
+                            label="ID" 
+                            variant="filled"
+                            disabled
+                        />                
                         <TextField 
                             name="nomeCompleto" 
                             type="text"
@@ -157,7 +173,21 @@ export default function ListaPessoas() {
                             variant="filled"   
                             disabled
                         />    
-                </styles.EnderecoInfo>                               
+                </styles.EnderecoInfo>
+                <styles.ButtonCustom>
+                    <Button 
+                        variant='contained'
+                        color="info"
+                        type="submit"
+                        disabled={permiteEditar}
+                    >Salvar</Button>
+                    <Button 
+                        variant='outlined'
+                        color="info"
+                        disabled={permiteEditar}
+                        onClick={handleFecharModal}
+                    >Fechar</Button>
+                </styles.ButtonCustom>                               
             </Dialog>
 
             <TableContainer component={Paper}>
@@ -168,7 +198,7 @@ export default function ListaPessoas() {
                             <TableCell align='right'>NOME COMPLETO</TableCell>
                             <TableCell align='right'>CPF</TableCell>
                             <TableCell align='right'>TELEFONE</TableCell>
-                            <TableCell align="center" >AÇÕES</TableCell>
+                            <TableCell align="center">AÇÕES</TableCell>
                         </TableRow>
                     </styles.TableHeadCustom>
                     <TableBody>
