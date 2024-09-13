@@ -6,7 +6,7 @@ const TableHeadCustom = styled(TableHead)`
 
 const TableButtonsCustom = styled('div')`
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 5px;
 
 `
@@ -27,11 +27,11 @@ const EnderecoInfo = styled('fieldset')`
     padding: 36px;
 `
 
-const ButtonCustom = styled('div')`
+const ModalButtonCustom = styled('div')`
     display: flex;
     justify-content: flex-end;
     gap: 5px;
     padding: 20px;
 `
 
-export default { TableHeadCustom, TableButtonsCustom, PessoaInfo, EnderecoInfo, ButtonCustom}
+export default { TableHeadCustom, TableButtonsCustom, PessoaInfo, EnderecoInfo, ModalButtonCustom}

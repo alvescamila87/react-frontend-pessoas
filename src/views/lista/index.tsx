@@ -15,6 +15,8 @@ export default function ListaPessoas() {
 
     const [pessoaInfo, setPessoaInfo] = useState<PessoaData[]>([])  
 
+    const [pessoaSelecionada, setPessoaSelecionada] = useState<PessoaData>();
+
     const [permiteEditar, setPermitirEditar] = useState(false)
     
     const [abreModal, setAbreModal] = useState(false)
@@ -34,14 +36,17 @@ export default function ListaPessoas() {
     //     }
     // }
 
-    const handleAbrirModal = (isEdit: boolean) => {
+    const handleAbrirModal = (isEdit: boolean, pessoa: PessoaData) => {
         setAbreModal(true);
+        setPessoaSelecionada(pessoa)
         setPermitirEditar(!isEdit);
       };
 
     const handleFecharModal = () => {
         setAbreModal(false);
       };
+
+    
 
 
     useEffect(() => {
@@ -51,31 +56,31 @@ export default function ListaPessoas() {
     const renderRows = () => {
        return pessoaInfo.map(pessoa => {
             return (
-                <TableRow key={`${pessoa.id}`}>
+                <TableRow key={`${pessoa.id}`} >
                     <TableCell>{`${pessoa.id}`}</TableCell>
                     <TableCell align="right" >{pessoa.nomeCompleto}</TableCell>
                     <TableCell align="right" >{pessoa.cpf}</TableCell>
                     <TableCell align="right" >{pessoa.telefone}</TableCell>
-                    <TableCell align="right" >
+                    <TableCell align="center" >
                         <styles.TableButtonsCustom>
                             <Button 
-                                variant="outlined"
+                                variant="contained"
                                 color="info"
-                                onClick={() => handleAbrirModal(false)}
+                                onClick={() => handleAbrirModal(false, pessoa)}
                             >
                                 Detalhes
                             </Button>                             
                             <Button 
-                                variant="contained"
+                                variant="outlined"
                                 color="info"
-                                onClick={() => handleAbrirModal(true)}
+                                onClick={() => handleAbrirModal(true,  pessoa)}
                             >
                                 Editar
                             </Button>                             
                             <Button 
                                 variant="contained" 
                                 color="error"
-                                onClick={() => handleAbrirModal(true)}
+                                onClick={() => handleAbrirModal(true,  pessoa)}
                             >
                                 Deletar
                             </Button>                             
@@ -98,6 +103,7 @@ export default function ListaPessoas() {
                             type="number"
                             label="ID" 
                             variant="filled"
+                            value={pessoaSelecionada?.id  || ''}
                             disabled
                         />                
                         <TextField 
@@ -105,13 +111,15 @@ export default function ListaPessoas() {
                             type="text"
                             label="Nome completo" 
                             variant={permiteEditar ? "filled" : "outlined"}
+                            value={pessoaSelecionada?.nomeCompleto  || ''}
                             disabled={permiteEditar}
                         />                
                         <TextField 
-                            name="cep" 
+                            name="cpf" 
                             type="text"
                             label="CPF" 
-                            variant={permiteEditar ? "filled" : "outlined"}  
+                            variant={permiteEditar ? "filled" : "outlined"} 
+                            value={pessoaSelecionada?.cpf  || ''} 
                             disabled={permiteEditar}
                         />                
                         <TextField 
@@ -119,6 +127,7 @@ export default function ListaPessoas() {
                             type="text"
                             label="Telefone" 
                             variant={permiteEditar ? "filled" : "outlined"}  
+                            value={pessoaSelecionada?.telefone  || ''} 
                             disabled={permiteEditar}
                         />        
                 </styles.PessoaInfo>
@@ -128,7 +137,8 @@ export default function ListaPessoas() {
                             name="cep" 
                             type="text"
                             label="CEP" 
-                            variant={permiteEditar ? "filled" : "outlined"}  
+                            variant={permiteEditar ? "filled" : "outlined"} 
+                            value={pessoaSelecionada?.endereco?.cep  || ''} 
                             disabled={permiteEditar}
                         />   
                         <TextField 
@@ -136,6 +146,7 @@ export default function ListaPessoas() {
                             type="text"
                             label="Logradouro" 
                             variant="filled"
+                            value={pessoaSelecionada?.endereco?.logradouro || ''}
                             disabled
                         />                
                         <TextField 
@@ -143,6 +154,7 @@ export default function ListaPessoas() {
                             type="text"
                             label="Número" 
                             variant={permiteEditar ? "filled" : "outlined"}  
+                            value={pessoaSelecionada?.endereco?.numero  || ''}
                             disabled={permiteEditar}
                         />              
                         <TextField 
@@ -150,6 +162,7 @@ export default function ListaPessoas() {
                             type="text"
                             label="Complemento" 
                             variant={permiteEditar ? "filled" : "outlined"} 
+                            value={pessoaSelecionada?.endereco?.complemento  || ''}
                             disabled={permiteEditar}
                         />   
                         <TextField 
@@ -157,6 +170,7 @@ export default function ListaPessoas() {
                             type="text"
                             label="Bairro" 
                             variant="filled" 
+                            value={pessoaSelecionada?.endereco?.bairro  || ''}
                             disabled
                         />   
                         <TextField 
@@ -164,17 +178,19 @@ export default function ListaPessoas() {
                             type="text"
                             label="Cidade" 
                             variant="filled"  
+                            value={pessoaSelecionada?.endereco?.localidade || ''}
                             disabled
                         />   
                         <TextField 
                             name="uf" 
                             type="text"
                             label="UF" 
-                            variant="filled"   
+                            variant="filled" 
+                            value={pessoaSelecionada?.endereco?.uf  || ''}  
                             disabled
                         />    
                 </styles.EnderecoInfo>
-                <styles.ButtonCustom>
+                <styles.ModalButtonCustom>
                     <Button 
                         variant='contained'
                         color="info"
@@ -187,13 +203,13 @@ export default function ListaPessoas() {
                         disabled={permiteEditar}
                         onClick={handleFecharModal}
                     >Fechar</Button>
-                </styles.ButtonCustom>                               
+                </styles.ModalButtonCustom>                               
             </Dialog>
 
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <styles.TableHeadCustom>
-                        <TableRow >
+                        <TableRow hover={true}>
                             <TableCell>ID</TableCell>
                             <TableCell align='right'>NOME COMPLETO</TableCell>
                             <TableCell align='right'>CPF</TableCell>
