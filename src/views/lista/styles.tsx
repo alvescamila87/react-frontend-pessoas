@@ -1,4 +1,4 @@
-import { styled, TableHead } from "@mui/material"
+import { styled, TableHead, Box } from "@mui/material"
 
 const TableHeadCustom = styled(TableHead)`
     background-color: lightgray;
@@ -34,4 +34,24 @@ const ModalButtonCustom = styled('div')`
     padding: 20px;
 `
 
-export default { TableHeadCustom, TableButtonsCustom, PessoaInfo, EnderecoInfo, ModalButtonCustom}
+const BoxListCustom = styled(Box)`
+    padding: 20px;
+    display: flex;
+    flex-direction: colunm;
+    align-item: center;
+`
+
+const DialogFormCustom = styled('form')`
+    height: 50%vh;
+    overflow-y: scroll;
+`
+
+export default { 
+    TableHeadCustom, 
+    TableButtonsCustom, 
+    PessoaInfo, 
+    EnderecoInfo, 
+    ModalButtonCustom, 
+    BoxListCustom,
+    DialogFormCustom
+}
