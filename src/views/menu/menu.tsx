@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const pages = [
     { nome: 'Lista de pessoas', path: "/listar" },
-    { nome: 'Pessoas', path: "/cadastro" }, 
-    { nome: 'Gerar Relatório CSV', path: "/relatorio" }, 
+    { nome: 'Cadastrar Pessoas', path: "/cadastro" }, 
+    { nome: 'Gerar Relatório', path: "/relatorio" }, 
 ];
 
 function ResponsiveAppBar() {
