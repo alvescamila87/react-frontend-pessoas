@@ -1,10 +1,12 @@
 # Frontend Cadastro de Pessoa 
+Criação do frontend do CRUD simples de pessoas de projeto com Backend em Java.
 
 ## Stacks
 * [MUI](https://mui.com/material-ui/)
 * [styled components](https://styled-components.com/)
 * [React](https://react.dev)
 * [Typescript](https://www.typescriptlang.org/)
+* [Backend Java](https://github.com/alvescamila87/api-cadastro-pessoa)
 
 ### Listar pessoas
 ![image](https://github.com/user-attachments/assets/84c350aa-97a2-4e46-a396-57d568476507)
@@ -22,7 +24,8 @@
 ![image](https://github.com/user-attachments/assets/8cfc01a3-c202-4af4-85ed-e4230dece763)
 ![image](https://github.com/user-attachments/assets/d8b2a49d-8765-4014-8076-7b5669fb5fba)
 
-
+## Autor
+Camila Alves
 
 
 
