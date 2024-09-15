@@ -24,6 +24,8 @@ export default function ListaPessoas() {
 
     const [abreModalDelecao, setAbreModalDelecao] = useState(false)
 
+    const [idPessoa, setIdPessoa] = useState<number>(0)
+
     async function consultarPessoas() {
         const pessoas = await API.get('/pessoas')
         //console.log(pessoas.data)       
@@ -61,6 +63,27 @@ export default function ListaPessoas() {
             console.error("Erro ao selecionar pessoa para exclusão.")
         }
         
+    }
+
+    async function pesquisarPessoaPorId(id: number) {
+        console.log(id)
+        if(id) {
+            try {
+                const response = await APIPessoa.get(`/pessoas/${id}`)
+                console.log(response.data)
+                const pessoaPesquisada = response.data
+                setPessoaInfo([pessoaPesquisada])                
+            } catch (error) {
+                console.log("Erro ao pesquisar pessoa por ID: ", error)
+            }
+        } else {
+            console.error("Erro ao pesquisar pessoa de ID: ", id)            
+        }
+    }
+
+    function limparPesquisa() {
+        setIdPessoa(0);
+        consultarPessoas();
     }
 
     const handleAbrirModal = (isEdit: boolean, pessoa: PessoaData) => {        
@@ -192,6 +215,35 @@ export default function ListaPessoas() {
 
     return ( 
         <>   
+
+            <form>
+                <styles.SearchFieldseatCustom>
+                    <legend>Pesquisar pessoa por ID</legend>
+                    <TextField 
+                        name="idPessoa"
+                        type="number"
+                        label="ID de cadastro"
+                        value={idPessoa}  
+                        onChange={e => setIdPessoa(Number(e.target.value))}                      
+                        variant="outlined"                    
+                    />
+                    <styles.ButtonSearchCustom>
+                        <Button 
+                            variant='contained'
+                            color="info"
+                            onClick={() => pesquisarPessoaPorId(idPessoa)}
+                        > Pesquisar
+                        </Button>
+                        <Button 
+                            variant='outlined'
+                            color="info"
+                            onClick={() => limparPesquisa()}
+                        > Limpar
+                        </Button>
+                    </styles.ButtonSearchCustom>
+                </styles.SearchFieldseatCustom>
+            </form>
+
             <Dialog fullWidth maxWidth="md" onClose={handleFecharModal} open={abreModal}>
                 <DialogTitle>Detalhes de cadastro</DialogTitle>
                 <styles.DialogFormCustom onSubmit={editarPessoa}>

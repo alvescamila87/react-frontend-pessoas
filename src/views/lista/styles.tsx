@@ -45,6 +45,20 @@ const DialogFormCustom = styled('form')`
     height: 50%vh;
     overflow-y: scroll;
 `
+const SearchFieldseatCustom = styled('fieldset')`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 20px;
+    padding: 36px;
+`
+
+const ButtonSearchCustom = styled('div')`
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    padding: 2px;
+`
 
 export default { 
     TableHeadCustom, 
@@ -53,5 +67,7 @@ export default {
     EnderecoInfo, 
     ModalButtonCustom, 
     BoxListCustom,
-    DialogFormCustom
+    DialogFormCustom,
+    SearchFieldseatCustom,
+    ButtonSearchCustom
 }
