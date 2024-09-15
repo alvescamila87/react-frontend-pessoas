@@ -15,6 +15,15 @@ Criação do frontend do CRUD simples de pessoas de projeto com Backend em Java.
 ![image](https://github.com/user-attachments/assets/dd558664-c73f-48bc-80c2-cfd87e0afd3d)
 ![image](https://github.com/user-attachments/assets/1a402486-72c5-4ff5-9709-e4269fc9264a)
 
+### Detalhes da pessoa
+![image](https://github.com/user-attachments/assets/320c365f-9a87-48d1-9ee5-3506479861fd)
+
+### Editar a pessoa
+![image](https://github.com/user-attachments/assets/e7e568df-7aa5-42d4-88bd-b36a24a06f42)
+
+### Excluir a pessoa
+![image](https://github.com/user-attachments/assets/a3da97e3-a2ae-40b3-99e8-e66ecbf0fc86)
+
 ### Gerar relatório CSV
 ![image](https://github.com/user-attachments/assets/4903a638-4750-476c-b8a9-0023a52c4d5c)
 ![image](https://github.com/user-attachments/assets/de571126-3e19-4174-b924-2cbc1a1dd688)
