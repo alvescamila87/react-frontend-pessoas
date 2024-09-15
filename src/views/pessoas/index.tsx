@@ -113,6 +113,7 @@ export default function Pessoas() {
         try {
             const novoCadastro = await APIPessoa.post('/pessoas', entradaDados)
             console.log("Cadastro pessoa: ", novoCadastro)
+            alert('Cadastro realizado com sucesso!')
 
         } catch (error){
             console.error("Erro ao enviar cadastro: ", error)
